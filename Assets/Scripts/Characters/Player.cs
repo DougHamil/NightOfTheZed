@@ -6,11 +6,15 @@ public class Player : MonoBehaviour
 	public Transform TorsoTransform;
 	public Transform LegsTransform;
 	public float MoveSpeed = 10.0f;
-	
+
+	private Animator torsoAnimator;
+	private Animator legsAnimator;
 	private Rigidbody2D rigidBody;
 	
 	void Start () {
 		this.rigidBody = this.gameObject.GetComponent<Rigidbody2D>();
+		this.torsoAnimator = TorsoTransform.gameObject.GetComponent<Animator>();
+		this.legsAnimator = LegsTransform.gameObject.GetComponent<Animator>();
 	}
 	
 	void Update () {
@@ -21,8 +25,14 @@ public class Player : MonoBehaviour
 		this.rigidBody.velocity = moveVector;
 
 		// Point legs in direction of movement, if moving
-		if(moveDirection.sqrMagnitude > 0f)
+		bool isMoving = moveDirection.sqrMagnitude > 0f;
+		if(isMoving)
+		{
 			LegsTransform.eulerAngles = new Vector3(0f, 0, -Mathf.Rad2Deg * Mathf.Atan2 (moveDirection.x, moveDirection.y));
+		}
+		legsAnimator.SetBool("isWalking", isMoving);
+		torsoAnimator.SetBool("isWalking", isMoving);
+		Debug.Log (isMoving);
 		
 		// Update Aim
 		Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);

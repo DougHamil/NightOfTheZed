@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1b3b4b945939a54ea0b23d3396115fb, type: 3}
+  m_Name: player_torso_SkeletonData
+  m_EditorClassIdentifier: 
+  atlasAssets:
+  - {fileID: 11400000, guid: c3141b109dd51c24d825b061862d2346, type: 2}
+  skeletonJSON: {fileID: 4900000, guid: 31f1c8b2ace992f438e57a716a5bc6aa, type: 3}
+  scale: .00999999978
+  fromAnimation: []
+  toAnimation: []
+  duration: []
+  defaultMix: .200000003
+  controller: {fileID: 9100000, guid: 105c5770d1aa194458d099e63d6c9881, type: 2}
