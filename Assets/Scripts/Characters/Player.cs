@@ -27,17 +27,17 @@ public class Player : MonoBehaviour
 		// Point legs in direction of movement, if moving
 		bool isMoving = moveDirection.sqrMagnitude > 0f;
 		if(isMoving)
-		{
 			LegsTransform.eulerAngles = new Vector3(0f, 0, -Mathf.Rad2Deg * Mathf.Atan2 (moveDirection.x, moveDirection.y));
-		}
-		legsAnimator.SetBool("isWalking", isMoving);
-		torsoAnimator.SetBool("isWalking", isMoving);
-		Debug.Log (isMoving);
-		
+
 		// Update Aim
 		Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		Quaternion rot = Quaternion.LookRotation(TorsoTransform.position - mousePosition, Vector3.forward);
 		TorsoTransform.rotation = rot;
 		TorsoTransform.eulerAngles = new Vector3(0, 0, TorsoTransform.eulerAngles.z);
+
+		// Update Animations
+		legsAnimator.SetBool("isWalking", isMoving);
+		torsoAnimator.SetBool("isWalking", isMoving);
+		torsoAnimator.SetBool("isAttacking", Input.GetButton("Fire1"));
 	}
 }
