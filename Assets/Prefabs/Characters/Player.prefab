@@ -211,6 +211,7 @@ GameObject:
   - 33: {fileID: 3348760}
   - 23: {fileID: 2328880}
   - 61: {fileID: 6135126}
+  - 114: {fileID: 11444722}
   m_Layer: 0
   m_Name: hand
   m_TagString: Untagged
@@ -1237,7 +1238,7 @@ Rigidbody2D:
   m_AngularDrag: .0500000007
   m_GravityScale: 1
   m_FixedAngle: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -1251,7 +1252,7 @@ CircleCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: -1.63}
+  m_Offset: {x: 0, y: -.0199999996}
   serializedVersion: 2
   m_Radius: 2.5
 --- !u!61 &6135126
@@ -1262,7 +1263,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 134260}
   m_Enabled: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_Offset: {x: -6.70552396e-08, y: 4.17232513e-07}
   serializedVersion: 2
@@ -1315,6 +1316,18 @@ MonoBehaviour:
   TorsoTransform: {fileID: 447684}
   LegsTransform: {fileID: 403270}
   MoveSpeed: 20
+--- !u!114 &11444722
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 134260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e2b9ff2eb2a447b9abc2ffbc281a868, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Force: 40000
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
