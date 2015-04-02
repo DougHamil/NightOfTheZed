@@ -1316,6 +1316,7 @@ MonoBehaviour:
   TorsoTransform: {fileID: 447684}
   LegsTransform: {fileID: 403270}
   MoveSpeed: 20
+  rightStickAim: 0
 --- !u!114 &11444722
 MonoBehaviour:
   m_ObjectHideFlags: 1

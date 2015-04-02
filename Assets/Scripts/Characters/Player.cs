@@ -6,15 +6,24 @@ public class Player : MonoBehaviour
 	public Transform TorsoTransform;
 	public Transform LegsTransform;
 	public float MoveSpeed = 10.0f;
+	public bool rightStickAim = false;
 
 	private Animator torsoAnimator;
 	private Animator legsAnimator;
 	private Rigidbody2D rigidBody;
+
+	private delegate Quaternion getRotationDelegate();
+
+	private getRotationDelegate getRotation;
 	
 	void Start () {
 		this.rigidBody = this.gameObject.GetComponent<Rigidbody2D>();
 		this.torsoAnimator = TorsoTransform.gameObject.GetComponent<Animator>();
 		this.legsAnimator = LegsTransform.gameObject.GetComponent<Animator>();
+		if (rightStickAim)
+			getRotation = getRightStickRotation;
+		else
+			getRotation = getMouseRotation;
 	}
 	
 	void Update () {
@@ -30,14 +39,25 @@ public class Player : MonoBehaviour
 			LegsTransform.eulerAngles = new Vector3(0f, 0, -Mathf.Rad2Deg * Mathf.Atan2 (moveDirection.x, moveDirection.y));
 
 		// Update Aim
-		Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-		Quaternion rot = Quaternion.LookRotation(TorsoTransform.position - mousePosition, Vector3.forward);
-		TorsoTransform.rotation = rot;
+		TorsoTransform.rotation = getRotation();
 		TorsoTransform.eulerAngles = new Vector3(0, 0, TorsoTransform.eulerAngles.z);
 
 		// Update Animations
 		legsAnimator.SetBool("isWalking", isMoving);
 		torsoAnimator.SetBool("isWalking", isMoving);
 		torsoAnimator.SetBool("isAttacking", Input.GetButton("Fire1"));
+	}
+
+	private Quaternion getMouseRotation() {
+		Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+		return Quaternion.LookRotation(TorsoTransform.position - mousePosition, Vector3.forward);
+	}
+
+	private Quaternion lastRotation = Quaternion.identity;
+	private Quaternion getRightStickRotation() {
+		Vector3 rightStickAim = new Vector3 (Input.GetAxis ("RightHorizontal"), Input.GetAxis ("RightVertical"));
+		if(rightStickAim.sqrMagnitude != 0)
+			lastRotation = Quaternion.AngleAxis(Mathf.Atan2 (rightStickAim.y,rightStickAim.x)*Mathf.Rad2Deg, Vector3.forward);
+		return lastRotation;
 	}
 }
