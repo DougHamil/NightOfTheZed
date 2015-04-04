@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Player : MonoBehaviour
 {
+	public ParticleSystem tempFiringSystem;
 	public Transform TorsoTransform;
 	public Transform LegsTransform;
 	public float MoveSpeed = 10.0f;
@@ -45,7 +46,12 @@ public class Player : MonoBehaviour
 		// Update Animations
 		legsAnimator.SetBool("isWalking", isMoving);
 		torsoAnimator.SetBool("isWalking", isMoving);
-		torsoAnimator.SetBool("isAttacking", Input.GetButton("Fire1"));
+		torsoAnimator.SetBool("isFiring", Input.GetButton("Fire1"));
+		
+		if(Input.GetButton("Fire1") && tempFiringSystem != null)
+		{
+			tempFiringSystem.Play();
+		}
 	}
 
 	private Quaternion getMouseRotation() {
