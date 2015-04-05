@@ -214,8 +214,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  speed: 5
-  TorsoTransform: {fileID: 0}
+  speed: 20
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

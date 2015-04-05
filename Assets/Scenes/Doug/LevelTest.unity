@@ -134,14 +134,6 @@ Prefab:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 11473150, guid: f5d4fa5049a3b854dad29017be388d9b, type: 2}
-      propertyPath: speed
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 11473150, guid: f5d4fa5049a3b854dad29017be388d9b, type: 2}
-      propertyPath: TorsoTransform
-      value: 
-      objectReference: {fileID: 1449830112}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f5d4fa5049a3b854dad29017be388d9b, type: 2}
   m_IsPrefabParent: 0
@@ -615,7 +607,7 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 3396962, guid: f66c77b5b441f994bb77924acbcc3af7, type: 2}
+    - target: {fileID: 3388544, guid: f66c77b5b441f994bb77924acbcc3af7, type: 2}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
@@ -623,7 +615,7 @@ Prefab:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 3388544, guid: f66c77b5b441f994bb77924acbcc3af7, type: 2}
+    - target: {fileID: 3396962, guid: f66c77b5b441f994bb77924acbcc3af7, type: 2}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
@@ -1280,10 +1272,6 @@ Light:
   m_ShadowRadius: 0
   m_ShadowAngle: 0
   m_AreaSize: {x: 1, y: 1}
---- !u!4 &1449830112
-Transform:
-  m_PrefabParentObject: {fileID: 497376, guid: f5d4fa5049a3b854dad29017be388d9b, type: 2}
-  m_PrefabInternal: {fileID: 174433269}
 --- !u!1 &1457455177
 GameObject:
   m_ObjectHideFlags: 0
