@@ -126,6 +126,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 11473150, guid: f5d4fa5049a3b854dad29017be388d9b, type: 2}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 1537684009}
     - target: {fileID: 3354646, guid: f5d4fa5049a3b854dad29017be388d9b, type: 2}
       propertyPath: m_Mesh
       value: 
@@ -729,7 +733,7 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 3396962, guid: f66c77b5b441f994bb77924acbcc3af7, type: 2}
+    - target: {fileID: 3388544, guid: f66c77b5b441f994bb77924acbcc3af7, type: 2}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
@@ -737,7 +741,7 @@ Prefab:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 3388544, guid: f66c77b5b441f994bb77924acbcc3af7, type: 2}
+    - target: {fileID: 3396962, guid: f66c77b5b441f994bb77924acbcc3af7, type: 2}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
@@ -1443,6 +1447,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Duration: 3
   Magnitude: 10
+--- !u!1 &1537684009
+GameObject:
+  m_PrefabParentObject: {fileID: 121798, guid: f66c77b5b441f994bb77924acbcc3af7, type: 2}
+  m_PrefabInternal: {fileID: 1022157908}
 --- !u!1 &1599106807
 GameObject:
   m_ObjectHideFlags: 0
