@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
 	public Transform LegsTransform;
 	public Transform TorsoSkeletonRoot;
 	public float MoveSpeed = 10.0f;
+	public float HitRecoveryTime = 0.5f;
 	public bool rightStickAim = false;
 
 	private SkeletonAnimation torsoAnimator;
@@ -16,16 +17,25 @@ public class Player : MonoBehaviour
 	private Shotgun activeWeapon;
 
 	private delegate Quaternion getRotationDelegate();
+	private delegate Vector3 getAimPointDelegate();
 	private getRotationDelegate getRotation;
+	private getAimPointDelegate getAimPoint;
+	private float hitTimer;
 	
 	void Start () {
 		this.rigidBody = this.gameObject.GetComponent<Rigidbody2D>();
 		this.torsoAnimator = TorsoTransform.gameObject.GetComponent<SkeletonAnimation>();
 		this.legsAnimator = LegsTransform.gameObject.GetComponent<Animator>();
 		if (rightStickAim)
+		{
 			getRotation = getRightStickRotation;
+			getAimPoint = getRightStickAimPosition;
+		}
 		else
+		{
 			getRotation = getMouseRotation;
+			getAimPoint = getMouseAimPosition;
+		}
 
 		this.torsoAnimator.skeleton.data.FindEvent("fire");
 		this.torsoAnimator.state.Event += OnSpineEvent;
@@ -39,36 +49,54 @@ public class Player : MonoBehaviour
 				this.activeWeapon.fire ();//this.activeWeapon.BeginFire(this.TorsoTransform.up * 500f);
 		}
 	}
-	
+
+	void OnDamaged(){
+		this.torsoAnimator.AnimationName = "hit_01";
+		this.hitTimer = HitRecoveryTime;
+	}
+
 	void Update () {
-		// Update Movement
-		Vector2 moveDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).normalized;
-		Vector2 moveVector = moveDirection * MoveSpeed;
-		// Use rigidbody movement to allow for forces to affect character
-		this.rigidBody.velocity = moveVector;
+		// Update hit timer
+		this.hitTimer -= Time.deltaTime;
+		if(this.hitTimer < 0f)
+			this.hitTimer = 0f;
 
-		// Point legs in direction of movement, if moving
-		bool isMoving = moveDirection.sqrMagnitude > 0f;
-		if(isMoving)
-			LegsTransform.eulerAngles = new Vector3(0f, 0, -Mathf.Rad2Deg * Mathf.Atan2 (moveDirection.x, moveDirection.y));
+		// Only allow input when not reeling from being hit
+		if(this.hitTimer <= 0f)
+		{
+			// Update Movement
+			Vector2 moveDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).normalized;
+			Vector2 moveVector = moveDirection * MoveSpeed;
+			// Use rigidbody movement to allow for forces to affect character
+			this.rigidBody.velocity = moveVector;
 
-		// Update Aim
-		TorsoTransform.rotation = getRotation();
-		TorsoTransform.eulerAngles = new Vector3(0, 0, TorsoTransform.eulerAngles.z);
-		if(activeWeapon != null)
-			activeWeapon.SetAimPoint(this.TorsoTransform.up * 500f);
+			// Point legs in direction of movement, if moving
+			bool isMoving = moveDirection.sqrMagnitude > 0f;
+			if(isMoving)
+				LegsTransform.eulerAngles = new Vector3(0f, 0, -Mathf.Rad2Deg * Mathf.Atan2 (moveDirection.x, moveDirection.y));
 
-		// Update Animations
-		legsAnimator.SetBool("isWalking", isMoving);
-		if(Input.GetButton("Fire1"))
-			torsoAnimator.AnimationName = "fire_weapon_2hand";
-		else if(isMoving)
-			torsoAnimator.AnimationName = "walk";
-		else
-			torsoAnimator.AnimationName = "idle";
-		
-		if(Input.GetButtonUp("Fire1") && activeWeapon != null)
-			activeWeapon.EndFire();
+			// Update Aim
+			TorsoTransform.rotation = getRotation();
+			TorsoTransform.eulerAngles = new Vector3(0, 0, TorsoTransform.eulerAngles.z);
+
+			Vector3 aimPoint = this.getAimPoint();
+			if(activeWeapon != null)
+				activeWeapon.SetAimPoint(aimPoint);
+			if(activeWeapon != null)
+			Debug.DrawLine(activeWeapon.Muzzle.position, aimPoint);
+			Debug.DrawLine(TorsoTransform.position, aimPoint);
+			// Update Animations
+			legsAnimator.SetBool("isWalking", isMoving);
+			if(Input.GetButton("Fire1"))
+				torsoAnimator.AnimationName = "fire_weapon_2hand";
+			else if(isMoving)
+				torsoAnimator.AnimationName = "walk_weapon_2hand";
+			else
+				torsoAnimator.AnimationName = "walk_weapon_2hand"; // TODO Add 2 hand weapon idle animation
+			
+			if(Input.GetButtonUp("Fire1") && activeWeapon != null)
+				activeWeapon.EndFire();
+		}
 	}
 
 	public void PickUpWeapon(Shotgun weapon)
@@ -92,7 +120,9 @@ public class Player : MonoBehaviour
 
 	private Quaternion getMouseRotation() {
 		Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-		return Quaternion.LookRotation(TorsoTransform.position - mousePosition, Vector3.forward);
+		Vector3 delta = (TorsoTransform.position - mousePosition).normalized;
+		float zAngle = Mathf.Atan2 (delta.y, delta.x) * Mathf.Rad2Deg + 90f;
+		return Quaternion.AngleAxis(zAngle, new Vector3(0, 0, 1f));
 	}
 
 	private Quaternion lastRotation = Quaternion.identity;
@@ -101,5 +131,13 @@ public class Player : MonoBehaviour
 		if(rightStickAim.sqrMagnitude != 0)
 			lastRotation = Quaternion.AngleAxis(Mathf.Atan2 (rightStickAim.y,rightStickAim.x)*Mathf.Rad2Deg, Vector3.forward);
 		return lastRotation;
+	}
+
+	private Vector3 getMouseAimPosition(){
+		return this.TorsoTransform.up * 1000f;
+	}
+
+	private Vector3 getRightStickAimPosition() {
+		return this.TorsoTransform.up * 1000f;
 	}
 }
