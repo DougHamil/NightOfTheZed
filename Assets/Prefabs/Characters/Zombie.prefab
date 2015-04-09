@@ -93,6 +93,7 @@ GameObject:
   - 114: {fileID: 11473150}
   - 114: {fileID: 11413736}
   - 114: {fileID: 11401392}
+  - 114: {fileID: 11459970}
   m_Layer: 0
   m_Name: Zombie
   m_TagString: zombie
@@ -1259,6 +1260,18 @@ MonoBehaviour:
   boneName: forefinger_base_l
   parentReference: {fileID: 0}
   transformLerpComplete: 0
+--- !u!114 &11459970
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 111804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b7feccc7840cbb4094b2b8944e3085e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ExperienceGranted: 250
 --- !u!114 &11462288
 MonoBehaviour:
   m_ObjectHideFlags: 1

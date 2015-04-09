@@ -15,6 +15,7 @@ public class Shotgun : MonoBehaviour {
 	public Light MuzzleFlashLight;
 	public ParticleSystem BloodImpactParticles;
 
+	private int MAX_BULLETS = 20;
 	private LineRenderer[] bulletTracerPool;
 	private bool isFiring = false;
 	private float shotTimer = 0f;
@@ -23,8 +24,8 @@ public class Shotgun : MonoBehaviour {
 
 	void Start()
 	{
-		bulletTracerPool = new LineRenderer[this.BulletsPerShot];
-		for(int i = 0; i < this.BulletsPerShot; i++)
+		bulletTracerPool = new LineRenderer[MAX_BULLETS];
+		for(int i = 0; i < MAX_BULLETS; i++)
 		{
 			bulletTracerPool[i] = Instantiate(BulletTracerPrefab);
 			bulletTracerPool[i].gameObject.SetActive(false);
@@ -40,6 +41,14 @@ public class Shotgun : MonoBehaviour {
 			player.PickUpWeapon(this);
 			this.gameObject.GetComponent<Collider2D>().enabled = false;
 		}
+	}
+
+	public void OnLevelUp(int level)
+	{
+		this.BulletsPerShot = 2 + level * 2;
+		this.Range = 50f + level * 5;
+		if(this.BulletsPerShot > MAX_BULLETS)
+			this.BulletsPerShot = MAX_BULLETS;
 	}
 
 	public void BeginFire(Vector3 aimPoint){

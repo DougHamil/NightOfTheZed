@@ -21,7 +21,15 @@ public class Player : MonoBehaviour
 	private getRotationDelegate getRotation;
 	private getAimPointDelegate getAimPoint;
 	private float hitTimer;
-	
+
+	void OnLevelUp(int level)
+	{
+		if(this.activeWeapon)
+		{
+			this.activeWeapon.OnLevelUp(level);
+		}
+	}
+
 	void Start () {
 		this.rigidBody = this.gameObject.GetComponent<Rigidbody2D>();
 		this.torsoAnimator = TorsoTransform.gameObject.GetComponent<SkeletonAnimation>();

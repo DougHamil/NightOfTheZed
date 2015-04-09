@@ -28,6 +28,7 @@ GameObject:
   - 50: {fileID: 5057068}
   - 114: {fileID: 11423202}
   - 114: {fileID: 11438232}
+  - 114: {fileID: 11415842}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -515,6 +516,17 @@ MonoBehaviour:
   timeScale: 1
   loop: 1
   _animationName: idle
+--- !u!114 &11415842
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 121798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 900c9a8109fd9694ca44add24a09a4ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11422754
 MonoBehaviour:
   m_ObjectHideFlags: 1
