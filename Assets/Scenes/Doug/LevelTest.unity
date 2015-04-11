@@ -1422,11 +1422,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 467632, guid: c5bdd0ffcf63b604cb44fc6d0e824d11, type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 11499658, guid: c5bdd0ffcf63b604cb44fc6d0e824d11, type: 2}
-      propertyPath: BulletsPerShot
-      value: 2
+    - target: {fileID: 11421282, guid: c5bdd0ffcf63b604cb44fc6d0e824d11, type: 2}
+      propertyPath: ImpactForce
+      value: 200
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c5bdd0ffcf63b604cb44fc6d0e824d11, type: 2}

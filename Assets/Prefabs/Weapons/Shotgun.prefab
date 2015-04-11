@@ -39,10 +39,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 467632}
-  - 114: {fileID: 11499658}
   - 61: {fileID: 6187058}
   - 33: {fileID: 3318424}
   - 23: {fileID: 2399254}
+  - 114: {fileID: 11421282}
   m_Layer: 0
   m_Name: Shotgun
   m_TagString: Untagged
@@ -164,7 +164,7 @@ Light:
   m_ShadowRadius: 0
   m_ShadowAngle: 0
   m_AreaSize: {x: 1, y: 1}
---- !u!114 &11499658
+--- !u!114 &11421282
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -172,18 +172,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 179060}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6182caeb46109c8438cee9a3544020ba, type: 3}
+  m_Script: {fileID: 11500000, guid: 58f6ff44d77eba74396a6ef69ccf6cf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BulletTracerPrefab: {fileID: 12043304, guid: 56c84298d007d6b4f86b7a2eb7b66c94, type: 2}
-  AttachmentPoint: root/spine/shoulder_r/arm_r/hand_r
-  BulletsPerShot: 12
-  damagePerBullet: 5
-  Range: 25
+  Name: Shotgun
+  FireAnimation: fire_weapon_2hand
+  FireAnimationDuration: .5
+  AttachmentBone: root/spine/shoulder_r/arm_r/hand_r
+  AttachmentPositionOffset: {x: 4, y: 0, z: -.00999999978}
+  AttachmentRotationOffset: {x: 0, y: 0, z: -90}
+  FireDelay: .5
+  Range: 50
+  BulletsPerShot: 5
+  DamagePerBullet: 10
   SprayAngle: 5
-  FiringDelay: .100000001
+  BulletTracerPrefab: {fileID: 12043304, guid: 56c84298d007d6b4f86b7a2eb7b66c94, type: 2}
   Muzzle: {fileID: 428002}
-  AttachmentTransform: {fileID: 411080}
+  AttachmentOffset: {x: 0, y: 0, z: 0}
   MuzzleFlashLight: {fileID: 10855094}
   BloodImpactParticles: {fileID: 19866328, guid: 8513d6930c1fdf149afe996788c6952d,
     type: 2}
